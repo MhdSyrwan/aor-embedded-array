@@ -1,5 +1,5 @@
 {
-  "name": "aor-embedded_array",
+  "name": "aor-embedded-array",
   "version": "0.0.1",
   "description": "Embeded Array Field for Admin On Rest",
   "main": "./lib/index.js",
