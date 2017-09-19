@@ -1,0 +1,6 @@
+node_modules
+lib
+example/static
+docs/_site/
+docs/js/
+docs/css/

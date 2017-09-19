@@ -1,0 +1,13 @@
+language: node_js
+node_js:
+  - '7.8.0'
+env:
+    global:
+        - NODE_ENV=test
+dist: trusty
+cache:
+  directories:
+    - node_modules
+branches:
+  only:
+    - master
