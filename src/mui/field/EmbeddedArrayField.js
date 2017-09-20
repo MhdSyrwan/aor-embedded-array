@@ -30,15 +30,14 @@ export class EmbeddedArrayField extends Component {
         return (
             <div>
                 {elements.map(
-                    (element, i) => (
+                    (element, i) =>
                         <SimpleShowLayout {...layoutProps} key={i}>
                             {React.Children.map(children, child =>
                                 React.cloneElement(child, {
                                     source: `${source}[${i}].${child.props.source}`,
                                 }),
                             )}
-                        </SimpleShowLayout>
-                    ),
+                        </SimpleShowLayout>,
                     this,
                 )}
             </div>

@@ -23,17 +23,12 @@ describe('<EmbeddedArrayField />', () => {
             <EmbeddedArrayField record={record} source="links">
                 <UrlField source="url" />
                 <TextField source="context" />
-            </EmbeddedArrayField>
+            </EmbeddedArrayField>,
         );
         assert.equal(2, wrapper.find('SimpleShowLayout').length);
         assert.deepEqual(
-            [
-                ['links[0].url', 'links[0].context'],
-                ['links[1].url', 'links[1].context'],
-            ],
-            wrapper
-                .find('SimpleShowLayout')
-                .map(s => s.prop('children').map(c => c.props.source))
+            [['links[0].url', 'links[0].context'], ['links[1].url', 'links[1].context']],
+            wrapper.find('SimpleShowLayout').map(s => s.prop('children').map(c => c.props.source)),
         );
     });
 });

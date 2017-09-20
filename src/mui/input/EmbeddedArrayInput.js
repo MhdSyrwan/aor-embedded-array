@@ -102,17 +102,7 @@ export class EmbeddedArrayInput extends Component {
         muiTheme: PropTypes.object.isRequired,
     };
 
-    renderListItem = ({
-        allowRemove,
-        items,
-        inputs,
-        member,
-        index,
-        translate,
-        labelRemove,
-        readOnly,
-        disabled,
-    }) => {
+    renderListItem = ({ allowRemove, items, inputs, member, index, translate, labelRemove, readOnly, disabled }) => {
         const removeItem = () => items.remove(index);
         const passedProps = {
             resource: this.props.resource,
@@ -129,16 +119,11 @@ export class EmbeddedArrayInput extends Component {
                             input &&
                             <div
                                 key={input.props.source}
-                                className={`aor-input-${member}.${input.props
-                                    .source}`}
+                                className={`aor-input-${member}.${input.props.source}`}
                                 style={input.props.style}
                             >
-                                <EmbeddedArrayInputFormField
-                                    input={input}
-                                    prefix={member}
-                                    {...passedProps}
-                                />
-                            </div>
+                                <EmbeddedArrayInputFormField input={input} prefix={member} {...passedProps} />
+                            </div>,
                     )}
                 </div>
                 {allowRemove &&
@@ -147,7 +132,7 @@ export class EmbeddedArrayInput extends Component {
                     <div style={styles.removeButton}>
                         <FlatButton
                             primary
-                            label={translate(labelRemove)}
+                            label={translate(labelRemove, { _: 'Remove' })}
                             icon={<ActionDeleteIcon />}
                             onClick={removeItem}
                         />
@@ -187,7 +172,7 @@ export class EmbeddedArrayInput extends Component {
                                 disabled,
                             })}
                             {index < items.length - 1 && <Divider />}
-                        </div>
+                        </div>,
                     )}
                 </div>
                 <br />
@@ -197,7 +182,7 @@ export class EmbeddedArrayInput extends Component {
                     <FlatButton
                         primary
                         icon={<ContentCreateIcon />}
-                        label={translate(labelAdd)}
+                        label={translate(labelAdd, { _: 'Add' })}
                         onClick={createItem}
                     />}
             </div>
@@ -207,31 +192,23 @@ export class EmbeddedArrayInput extends Component {
     render() {
         const { source, label, addLabel, translate, resource } = this.props;
         const labelStyle = Object.assign(styles.label, {
-            color: this.context.muiTheme
-                ? this.context.muiTheme.textField.focusColor
-                : '',
+            color: this.context.muiTheme ? this.context.muiTheme.textField.focusColor : '',
         });
 
         const minimizedLabel =
             typeof label !== 'undefined'
                 ? translate(label, { _: label })
                 : translate(
-                      `resources.${resource}.fields.${source
-                          .replace(/\./g, '.fields.')
-                          .replace(/\[\d+\]/g, '')}.name`,
+                      `resources.${resource}.fields.${source.replace(/\./g, '.fields.').replace(/\[\d+\]/g, '')}.name`,
                       {
                           _: inflection.humanize(source.split('.').pop()),
-                      }
+                      },
                   );
 
         const labelElement =
             !addLabel &&
             <div style={styles.labelContainer}>
-                <TextFieldLabel
-                    muiTheme={this.context.muiTheme}
-                    style={labelStyle}
-                    shrink={false}
-                >
+                <TextFieldLabel muiTheme={this.context.muiTheme} style={labelStyle} shrink={false}>
                     {minimizedLabel}
                 </TextFieldLabel>
             </div>;
@@ -239,11 +216,7 @@ export class EmbeddedArrayInput extends Component {
         return (
             <div>
                 {labelElement}
-                <FieldArray
-                    name={source}
-                    component={this.renderList}
-                    props={this.props}
-                />
+                <FieldArray name={source} component={this.renderList} props={this.props} />
             </div>
         );
     }
