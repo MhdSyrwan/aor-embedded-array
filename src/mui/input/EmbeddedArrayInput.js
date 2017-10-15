@@ -71,6 +71,7 @@ export class EmbeddedArrayInput extends Component {
         allowEmpty: PropTypes.bool.isRequired,
         allowAdd: PropTypes.bool.isRequired,
         allowRemove: PropTypes.bool.isRequired,
+        removeButtonStyle: PropTypes.object,
         arrayElStyle: PropTypes.object,
         basePath: PropTypes.string,
         children: PropTypes.node.isRequired,
@@ -94,6 +95,7 @@ export class EmbeddedArrayInput extends Component {
         allowEmpty: true,
         allowAdd: true,
         allowRemove: true,
+        removeButtonStyle: styles.removeButton,
         labelAdd: 'aor.input.embedded_array.add',
         labelRemove: 'aor.input.embedded_array.remove',
     };
@@ -102,7 +104,7 @@ export class EmbeddedArrayInput extends Component {
         muiTheme: PropTypes.object.isRequired,
     };
 
-    renderListItem = ({ allowRemove, items, inputs, member, index, translate, labelRemove, readOnly, disabled }) => {
+    renderListItem = ({ allowRemove, items, inputs, member, index, translate, labelRemove, readOnly, disabled, removeButtonStyle }) => {
         const removeItem = () => items.remove(index);
         const passedProps = {
             resource: this.props.resource,
@@ -129,7 +131,7 @@ export class EmbeddedArrayInput extends Component {
                 {allowRemove &&
                     !readOnly &&
                     !disabled &&
-                    <div style={styles.removeButton}>
+                    <div style={removeButtonStyle}>
                         <FlatButton
                             primary
                             label={translate(labelRemove, { _: 'Remove' })}
@@ -152,6 +154,7 @@ export class EmbeddedArrayInput extends Component {
             allowRemove,
             readOnly,
             disabled,
+            removeButtonStyle,
         } = this.props;
         const createItem = () => items.push();
 
@@ -170,6 +173,7 @@ export class EmbeddedArrayInput extends Component {
                                 allowRemove,
                                 readOnly,
                                 disabled,
+                                removeButtonStyle,
                             })}
                             {index < items.length - 1 && <Divider />}
                         </div>,
