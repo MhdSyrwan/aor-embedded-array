@@ -180,7 +180,7 @@ export class EmbeddedArrayInput extends Component {
                     !readOnly &&
                     !disabled &&
                     <FlatButton
-                        primary
+                        secondary
                         icon={<ContentCreateIcon />}
                         label={translate(labelAdd, { _: 'Add' })}
                         onClick={createItem}
