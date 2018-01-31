@@ -8,7 +8,7 @@ import TextFieldLabel from 'material-ui/TextField/TextFieldLabel';
 import ContentCreateIcon from 'material-ui/svg-icons/content/create';
 import ActionDeleteIcon from 'material-ui/svg-icons/action/delete';
 import Divider from 'material-ui/Divider';
-
+import FormLabel from 'material-ui/FormLabel'
 import { translate } from 'admin-on-rest';
 
 import EmbeddedArrayInputFormField from '../form/EmbeddedArrayInputFormField';
@@ -208,9 +208,9 @@ export class EmbeddedArrayInput extends Component {
         const labelElement =
             !addLabel &&
             <div style={styles.labelContainer}>
-                <TextFieldLabel muiTheme={this.context.muiTheme} style={labelStyle} shrink={false}>
+                <FormLabel muiTheme={this.context.muiTheme} style={labelStyle}>
                     {minimizedLabel}
-                </TextFieldLabel>
+                </FormLabel>
             </div>;
 
         return (
