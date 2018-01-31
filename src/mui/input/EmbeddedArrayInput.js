@@ -9,6 +9,7 @@ import ActionDeleteIcon from 'mmaterial-ui-icons/Delete';
 import Divider from 'material-ui/Divider';
 
 import { translate } from 'react-admin';
+import FormLabel from 'material-ui/FormLabel'
 
 import EmbeddedArrayInputFormField from '../form/EmbeddedArrayInputFormField';
 
@@ -206,9 +207,9 @@ export class EmbeddedArrayInput extends Component {
         const labelElement =
             !addLabel &&
             <div style={styles.labelContainer}>
-                <TextFieldLabel muiTheme={this.context.muiTheme} style={labelStyle} shrink={false}>
+                <FormLabel muiTheme={this.context.muiTheme} style={labelStyle}>
                     {minimizedLabel}
-                </TextFieldLabel>
+                </FormLabel>
             </div>;
 
         return (
