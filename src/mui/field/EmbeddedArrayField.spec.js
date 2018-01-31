@@ -2,7 +2,7 @@ import React from 'react';
 import assert from 'assert';
 import { shallow } from 'enzyme';
 import EmbeddedArrayField from './EmbeddedArrayField';
-import { TextField, UrlField } from 'admin-on-rest';
+import { TextField, UrlField } from 'react-admin';
 
 const record = {
     links: [
