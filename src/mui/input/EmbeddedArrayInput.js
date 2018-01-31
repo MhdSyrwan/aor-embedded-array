@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import { FieldArray } from 'redux-form';
 import inflection from 'inflection';
 
-import FlatButton from 'material-ui/FlatButton';
-import TextFieldLabel from 'material-ui/TextField/TextFieldLabel';
-import ContentCreateIcon from 'material-ui/svg-icons/content/create';
-import ActionDeleteIcon from 'material-ui/svg-icons/action/delete';
+import Button from 'material-ui/Button';
+import ContentCreateIcon from 'material-ui-icons/Create';
+import ActionDeleteIcon from 'mmaterial-ui-icons/Delete';
 import Divider from 'material-ui/Divider';
 
-import { translate } from 'admin-on-rest';
+import { translate } from 'react-admin';
+import FormLabel from 'material-ui/FormLabel'
 
 import EmbeddedArrayInputFormField from '../form/EmbeddedArrayInputFormField';
 
@@ -130,12 +130,11 @@ export class EmbeddedArrayInput extends Component {
                     !readOnly &&
                     !disabled &&
                     <div style={styles.removeButton}>
-                        <FlatButton
-                            primary
-                            label={translate(labelRemove, { _: 'Remove' })}
-                            icon={<ActionDeleteIcon />}
-                            onClick={removeItem}
-                        />
+                        <Button color="primary"
+                            onClick={removeItem}>
+                          <ActionDeleteIcon className={props.classes.icon} />
+                          {translate(labelRemove, { _: 'Remove' })}
+                        </Button>
                     </div>}
             </div>
         );
@@ -208,9 +207,9 @@ export class EmbeddedArrayInput extends Component {
         const labelElement =
             !addLabel &&
             <div style={styles.labelContainer}>
-                <TextFieldLabel muiTheme={this.context.muiTheme} style={labelStyle} shrink={false}>
+                <FormLabel muiTheme={this.context.muiTheme} style={labelStyle}>
                     {minimizedLabel}
-                </TextFieldLabel>
+                </FormLabel>
             </div>;
 
         return (
