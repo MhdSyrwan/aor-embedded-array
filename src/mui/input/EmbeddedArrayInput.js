@@ -132,7 +132,7 @@ export class EmbeddedArrayInput extends Component {
                     <div style={styles.removeButton}>
                         <Button color="primary"
                             onClick={removeItem}>
-                          <ActionDeleteIcon className={props.classes.icon} />
+                          <ActionDeleteIcon />
                           {translate(labelRemove, { _: 'Remove' })}
                         </Button>
                     </div>}
@@ -178,12 +178,11 @@ export class EmbeddedArrayInput extends Component {
                 {allowAdd &&
                     !readOnly &&
                     !disabled &&
-                    <FlatButton
-                        primary
-                        icon={<ContentCreateIcon />}
-                        label={translate(labelAdd, { _: 'Add' })}
-                        onClick={createItem}
-                    />}
+                     <Button color="primary"
+                             onClick={removeItem}>
+                        <ActionDeleteIcon />
+                          {translate(labelRemove, { _: 'Add' })}
+                     </Button>}
             </div>
         );
     };
