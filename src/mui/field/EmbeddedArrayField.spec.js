@@ -18,7 +18,7 @@ const record = {
 };
 
 describe('<EmbeddedArrayField />', () => {
-    it('should display 3 nested SimpleShowLayouts', () => {
+    it('should display 2 nested SimpleShowLayouts', () => {
         const wrapper = shallow(
             <EmbeddedArrayField record={record} source="links">
                 <UrlField source="url" />
@@ -28,6 +28,25 @@ describe('<EmbeddedArrayField />', () => {
         assert.equal(2, wrapper.find('SimpleShowLayout').length);
         assert.deepEqual(
             [['links[0].url', 'links[0].context'], ['links[1].url', 'links[1].context']],
+            wrapper.find('SimpleShowLayout').map(s => s.prop('children').map(c => c.props.source)),
+        );
+    });
+});
+
+const primitiveRecord = {
+    links: ['https://www.google.com/', 'https://www.bing.com/'],
+};
+
+describe('<EmbeddedArrayField /> with primitive record', () => {
+    it('should display 2 nested SimpleShowLayouts', () => {
+        const wrapper = shallow(
+            <EmbeddedArrayField record={primitiveRecord} source="links">
+                <UrlField />
+            </EmbeddedArrayField>,
+        );
+        assert.equal(2, wrapper.find('SimpleShowLayout').length);
+        assert.deepEqual(
+            [['links[0]'], ['links[1]']],
             wrapper.find('SimpleShowLayout').map(s => s.prop('children').map(c => c.props.source)),
         );
     });

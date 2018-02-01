@@ -22,7 +22,7 @@ yarn add aor-embedded-array
 
 ## Usage
 
-In your `App.js` or wherever you want to call `<Admin>` component define the `restClientRouter` like this
+Define the `Create` and `Edit` View like this:
 
 ```jsx
  <EmbeddedArrayInput source="links">
@@ -35,3 +35,23 @@ In your `App.js` or wherever you want to call `<Admin>` component define the `re
  </EmbeddedArrayInput>
 ```
 
+Define the `Show` and `List` View like this:
+
+```jsx
+ <EmbeddedArrayField source="links">
+     <UrlField source="url" />
+     <TextField source="context" />
+     <EmbeddedArrayField source="metadata">
+         <TextField source="name" />
+         <TextField source="value" />
+     </EmbeddedArrayField>
+ </EmbeddedArrayField>
+```
+
+For primitive arrays, define the Views the same way but without the source prop for the unique child:
+
+```jsx
+ <EmbeddedArrayInput source="links">
+     <LongTextInput />
+ </EmbeddedArrayInput>
+```

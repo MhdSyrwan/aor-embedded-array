@@ -46,8 +46,10 @@ const styles = {
  * An Input component for generating/editing an embedded array
  *
  *
- * Use it with any set of input componentents as children, like `<TextInput>`,
- * `<SelectInput>`, `<RadioButtonGroupInput>` ... etc.
+ * Use it with any set of input components as children, like `<TextInput>`,
+ * `<SelectInput>`, `<RadioButtonGroupInput>`, etc.
+ *
+ * You must define the targeted field for each child or only use one child for primitive arrays.
  *
  * @example
  * export const CommentEdit = (props) => (
@@ -59,6 +61,16 @@ const styles = {
  *                  <ReferenceInput resource="tags" reference="tags" source="tag_id" >
  *                      <SelectInput optionText="name" />
  *                  </ReferenceInput>
+ *               </EmbeddedArrayInput>
+ *         </SimpleForm>
+ *     </Edit>
+ * );
+ * @example
+ * export const CommentEdit = (props) => (
+ *     <Edit {...props}>
+ *         <SimpleForm>
+ *              <EmbeddedArrayInput source="links">
+ *                  <TextInput />
  *               </EmbeddedArrayInput>
  *         </SimpleForm>
  *     </Edit>

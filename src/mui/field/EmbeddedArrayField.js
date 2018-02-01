@@ -6,7 +6,7 @@ import { SimpleShowLayout } from 'admin-on-rest';
 /**
  * A container component that shows embedded array elements as a list of input sets
  *
- * You must define the fields and pass them as children.
+ * You must define the fields and pass them as children or only use one field for primitive arrays.
  *
  * @example Display all the items of an order
  * // order = {
@@ -20,7 +20,17 @@ import { SimpleShowLayout } from 'admin-on-rest';
  *      <NumberField source="qty" />
  *      <NumberField source="price" options={{ style: 'currency', currency: 'USD' }} />
  * </EmbeddedArrayField>
- *
+ * @example Display all the tags of a product
+ * // product = {
+ * //   id: 123,
+ * //   tags: [
+ * //       'relaxation',
+ * //       'chair',
+ * //   ],
+ * // }
+ * <EmbeddedArrayField source="tags">
+ *      <ChipField />
+ * </EmbeddedArrayField>
  */
 export class EmbeddedArrayField extends Component {
     render() {
@@ -34,7 +44,9 @@ export class EmbeddedArrayField extends Component {
                         <SimpleShowLayout {...layoutProps} key={i}>
                             {React.Children.map(children, child =>
                                 React.cloneElement(child, {
-                                    source: `${source}[${i}].${child.props.source}`,
+                                    source: child.props.source
+                                        ? `${source}[${i}].${child.props.source}`
+                                        : `${source}[${i}]`,
                                 }),
                             )}
                         </SimpleShowLayout>,

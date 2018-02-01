@@ -11,12 +11,10 @@ import isRequired from './isRequired';
  * with a string you provide
  *
  * @example
- *
  * <EmbeddedArrayInputFormField input={input} prefix={my_prefix} />
- *
  */
 const EmbeddedArrayInputFormField = ({ input, prefix, ...rest }) => {
-    const name = `${prefix}.${input.props.source}`;
+    const name = input.props.source ? `${prefix}.${input.props.source}` : prefix;
     const source = name;
 
     if (input.props.addField) {
