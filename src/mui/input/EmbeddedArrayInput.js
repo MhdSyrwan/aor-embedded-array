@@ -131,7 +131,7 @@ export class EmbeddedArrayInput extends Component {
                     !disabled &&
                     <div style={styles.removeButton}>
                         <FlatButton
-                            primary
+                            secondary
                             label={translate(labelRemove, { _: 'Remove' })}
                             icon={<ActionDeleteIcon />}
                             onClick={removeItem}
@@ -180,7 +180,7 @@ export class EmbeddedArrayInput extends Component {
                     !readOnly &&
                     !disabled &&
                     <FlatButton
-                        secondary
+                        primary
                         icon={<ContentCreateIcon />}
                         label={translate(labelAdd, { _: 'Add' })}
                         onClick={createItem}
