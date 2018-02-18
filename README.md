@@ -55,3 +55,41 @@ For primitive arrays, define the Views the same way but without the source prop 
      <LongTextInput />
  </EmbeddedArrayInput>
 ```
+
+Uses of custom action buttons
+
+```jsx
+ import FlatButton from 'material-ui/FlatButton';
+ import ActionDeleteIcon from 'material-ui/svg-icons/action/delete';
+ const CustomDeleteButton = ({items, index, removeItem}) => (
+     <FlatButton
+         key={index}
+         secondary
+         label="Delete"
+         icon={<ActionDeleteIcon />}
+         onClick={() => {
+             // Take custom action
+             console.log(items, index);
+             items.remove(index);
+         }}
+     />
+ )
+```
+
+```jsx
+ var style = {
+     customButtonStyle: {
+         display: "inline-block",
+         clear: "both",
+         float: "right",
+         padding: "2em 0em 0em 0em"
+     }
+ }
+ <EmbeddedArrayInput source="links" 
+     customButtonStyle={style.customButtonStyle} 
+     customButtons={[<CustomDeleteButton key={0}/>]}
+     >
+     <UrlField source="url" />
+     <TextField source="context" />
+ </EmbeddedArrayInput>
+```
