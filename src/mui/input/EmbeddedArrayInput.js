@@ -114,7 +114,19 @@ export class EmbeddedArrayInput extends Component {
         muiTheme: PropTypes.object.isRequired,
     };
 
-    renderListItem = ({ allowRemove, items, inputs, member, index, translate, labelRemove, readOnly, disabled }) => {
+    renderListItem = ({
+        allowRemove,
+        items,
+        inputs,
+        member,
+        index,
+        translate,
+        labelRemove,
+        readOnly,
+        disabled,
+        customButtons,
+        customButtonStyle,
+    }) => {
         const removeItem = () => items.remove(index);
         const passedProps = {
             resource: this.props.resource,
@@ -149,6 +161,11 @@ export class EmbeddedArrayInput extends Component {
                             onClick={removeItem}
                         />
                     </div>}
+                {
+                    <div style={customButtonStyle}>
+                        {customButtons && customButtons.map(button => React.cloneElement(button, { items, index }))}
+                    </div>
+                }
             </div>
         );
     };
@@ -164,6 +181,8 @@ export class EmbeddedArrayInput extends Component {
             allowRemove,
             readOnly,
             disabled,
+            customButtons,
+            customButtonStyle,
         } = this.props;
         const createItem = () => items.push();
 
@@ -182,6 +201,8 @@ export class EmbeddedArrayInput extends Component {
                                 allowRemove,
                                 readOnly,
                                 disabled,
+                                customButtons,
+                                customButtonStyle,
                             })}
                             {index < items.length - 1 && <Divider />}
                         </div>,
