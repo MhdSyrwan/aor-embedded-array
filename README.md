@@ -61,7 +61,7 @@ Uses of custom action buttons
 ```jsx
  import FlatButton from 'material-ui/FlatButton';
  import ActionDeleteIcon from 'material-ui/svg-icons/action/delete';
- const CustomDeleteButton = ({items, index, removeItem}) => (
+ const CustomDeleteButton = ({items, index}) => (
      <FlatButton
          key={index}
          secondary
