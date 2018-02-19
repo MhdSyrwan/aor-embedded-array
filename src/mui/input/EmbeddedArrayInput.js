@@ -98,6 +98,8 @@ export class EmbeddedArrayInput extends Component {
         readOnly: PropTypes.bool,
         record: PropTypes.object,
         source: PropTypes.string,
+        customButtons: PropTypes.node,
+        customButtonStyle: PropTypes.object,
     };
 
     static defaultProps = {
