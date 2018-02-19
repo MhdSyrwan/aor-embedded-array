@@ -34,12 +34,6 @@ const styles = {
         position: 'relative',
         textTransform: 'capitalize',
     },
-    removeButton: {
-        clear: 'both',
-        margin: '1em',
-        display: 'block',
-        textAlign: 'right',
-    },
 };
 
 /**
@@ -99,7 +93,7 @@ export class EmbeddedArrayInput extends Component {
         record: PropTypes.object,
         source: PropTypes.string,
         customButtons: PropTypes.node,
-        customButtonStyle: PropTypes.object,
+        actionsContainerStyle: PropTypes.object,
     };
 
     static defaultProps = {
@@ -110,6 +104,12 @@ export class EmbeddedArrayInput extends Component {
         allowRemove: true,
         labelAdd: 'aor.input.embedded_array.add',
         labelRemove: 'aor.input.embedded_array.remove',
+        actionsContainerStyle: {
+            clear: 'both',
+            margin: '1em',
+            display: 'block',
+            textAlign: 'right',
+        },
     };
 
     static contextTypes = {
@@ -127,7 +127,7 @@ export class EmbeddedArrayInput extends Component {
         readOnly,
         disabled,
         customButtons,
-        customButtonStyle,
+        actionsContainerStyle,
     }) => {
         const removeItem = () => items.remove(index);
         const passedProps = {
@@ -152,22 +152,19 @@ export class EmbeddedArrayInput extends Component {
                             </div>,
                     )}
                 </div>
-                {allowRemove &&
-                    !readOnly &&
-                    !disabled &&
-                    <div style={styles.removeButton}>
-                        <FlatButton
-                            secondary
-                            label={translate(labelRemove, { _: 'Remove' })}
-                            icon={<ActionDeleteIcon />}
-                            onClick={removeItem}
-                        />
-                    </div>}
-                {
-                    <div style={customButtonStyle}>
+                {(customButtons || (allowRemove && !readOnly && !disabled)) &&
+                    <div style={actionsContainerStyle}>
+                        {allowRemove &&
+                            !readOnly &&
+                            !disabled &&
+                            <FlatButton
+                                secondary
+                                label={translate(labelRemove, { _: 'Remove' })}
+                                icon={<ActionDeleteIcon />}
+                                onClick={removeItem}
+                            />}
                         {customButtons && customButtons.map(button => React.cloneElement(button, { items, index }))}
-                    </div>
-                }
+                    </div>}
             </div>
         );
     };
@@ -184,7 +181,7 @@ export class EmbeddedArrayInput extends Component {
             readOnly,
             disabled,
             customButtons,
-            customButtonStyle,
+            actionsContainerStyle,
         } = this.props;
         const createItem = () => items.push();
 
@@ -204,7 +201,7 @@ export class EmbeddedArrayInput extends Component {
                                 readOnly,
                                 disabled,
                                 customButtons,
-                                customButtonStyle,
+                                actionsContainerStyle,
                             })}
                             {index < items.length - 1 && <Divider />}
                         </div>,

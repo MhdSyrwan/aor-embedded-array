@@ -78,7 +78,7 @@ Uses of custom action buttons
 
 ```jsx
  var style = {
-     customButtonStyle: {
+     actionsContainerStyle: {
          display: "inline-block",
          clear: "both",
          float: "right",
@@ -86,7 +86,7 @@ Uses of custom action buttons
      }
  }
  <EmbeddedArrayInput source="links" 
-     customButtonStyle={style.customButtonStyle} 
+     customButtonStyle={style.actionsContainerStyle} 
      customButtons={[<CustomDeleteButton key={0}/>]}
      >
      <UrlField source="url" />

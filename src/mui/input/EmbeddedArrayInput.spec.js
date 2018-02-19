@@ -112,7 +112,7 @@ describe('<EmbeddedArrayInput /> with custom action buttons', () => {
         resource: 'the_items',
         translate: x => x,
         customButtons: [<CustomDeleteButton key={0} />],
-        customButtonStyle: { padding: '1em' },
+        actionsContainerStyle: { padding: '1em' },
         allowRemove: false,
     };
 
