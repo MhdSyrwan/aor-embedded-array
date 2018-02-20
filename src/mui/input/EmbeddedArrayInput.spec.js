@@ -6,6 +6,8 @@ import { TextInput } from 'admin-on-rest';
 
 import { EmbeddedArrayInput } from './EmbeddedArrayInput';
 
+import FlatButton from 'material-ui/FlatButton';
+
 describe('<EmbeddedArrayInput />', () => {
     const defaultProps = {
         source: 'sub_items',
@@ -97,5 +99,40 @@ describe('<EmbeddedArrayInput /> with primitive child', () => {
             }),
             [['TextInput', 'sub_items[0]'], ['TextInput', 'sub_items[1]']],
         );
+    });
+});
+
+describe('<EmbeddedArrayInput /> with custom action buttons', () => {
+    const CustomDeleteButton = ({ items, index }) =>
+        <FlatButton key={index} secondary label="Delete" onClick={() => items.remove(index)} />;
+
+    const defaultProps = {
+        source: 'sub_items',
+        children: [<TextInput key={1} />],
+        resource: 'the_items',
+        translate: x => x,
+        customButtons: [<CustomDeleteButton key={0} />],
+        actionsContainerStyle: { padding: '1em' },
+        allowRemove: false,
+    };
+
+    it('should render FieldArray Element', () => {
+        const wrapper = shallow(<EmbeddedArrayInput {...defaultProps} input={{ value: [{}, {}] }} />);
+        const fieldArrayElement = wrapper.find('FieldArray');
+        assert.equal(fieldArrayElement.prop('name'), 'sub_items');
+    });
+
+    it('should render 2 CustomDeleteButton elements', () => {
+        // instantiating an EmbeddedArrayInput to test its renderList function
+        const embeddedArrayInput = new EmbeddedArrayInput(defaultProps);
+
+        // mocking redux-form FieldArray items array
+        const items = ['sub_items[0]', 'sub_items[1]'];
+
+        // shallow rendering the renderList helper to test its contents
+        const renderList = shallow(embeddedArrayInput.renderList({ fields: items }));
+
+        // Totally there should be 2 CustomDeleteButton
+        assert.equal(renderList.find('CustomDeleteButton').length, 2);
     });
 });
