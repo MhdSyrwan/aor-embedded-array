@@ -86,7 +86,7 @@ Uses of custom action buttons
      }
  }
  <EmbeddedArrayInput source="links" 
-     customButtonStyle={style.actionsContainerStyle} 
+     actionsContainerStyle={style.actionsContainerStyle} 
      customButtons={[<CustomDeleteButton key={0}/>]}
      >
      <UrlField source="url" />
