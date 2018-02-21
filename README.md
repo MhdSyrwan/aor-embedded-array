@@ -22,6 +22,8 @@ yarn add aor-embedded-array
 
 ## Usage
 
+### Basic Usage
+
 Define the `Create` and `Edit` View like this:
 
 ```jsx
@@ -56,7 +58,7 @@ For primitive arrays, define the Views the same way but without the source prop 
  </EmbeddedArrayInput>
 ```
 
-Uses of custom action buttons
+### Using Custom action buttons
 
 ```jsx
  import FlatButton from 'material-ui/FlatButton';

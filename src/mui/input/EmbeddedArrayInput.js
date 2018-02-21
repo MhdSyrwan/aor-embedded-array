@@ -5,7 +5,7 @@ import inflection from 'inflection';
 
 import FlatButton from 'material-ui/FlatButton';
 import TextFieldLabel from 'material-ui/TextField/TextFieldLabel';
-import ContentCreateIcon from 'material-ui/svg-icons/content/create';
+import ContentAdd from 'material-ui/svg-icons/content/add';
 import ActionDeleteIcon from 'material-ui/svg-icons/action/delete';
 import Divider from 'material-ui/Divider';
 
@@ -213,7 +213,7 @@ export class EmbeddedArrayInput extends Component {
                     !disabled &&
                     <FlatButton
                         primary
-                        icon={<ContentCreateIcon />}
+                        icon={<ContentAdd />}
                         label={translate(labelAdd, { _: 'Add' })}
                         onClick={createItem}
                     />}
