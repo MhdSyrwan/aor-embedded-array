@@ -13,29 +13,6 @@ import { translate } from 'admin-on-rest';
 
 import EmbeddedArrayInputFormField from '../form/EmbeddedArrayInputFormField';
 
-const styles = {
-    container: {
-        padding: '0 1em 1em 0em',
-        width: '90%',
-        display: 'inline-block',
-    },
-    innerContainer: {
-        padding: '0 1em 1em 1em',
-        width: '90%',
-        display: 'inline-block',
-    },
-    labelContainer: {
-        padding: '1.2em 1em 0 0',
-        width: '90%',
-        display: 'inline-block',
-    },
-    label: {
-        top: 0,
-        position: 'relative',
-        textTransform: 'capitalize',
-    },
-};
-
 /**
  * An Input component for generating/editing an embedded array
  *
@@ -94,6 +71,10 @@ export class EmbeddedArrayInput extends Component {
         source: PropTypes.string,
         customButtons: PropTypes.node,
         actionsContainerStyle: PropTypes.object,
+        innerContainerStyle: PropTypes.object,
+        labelContainerStyle: PropTypes.object,
+        labelStyle: PropTypes.object,
+        allowDivider: PropTypes.bool,
     };
 
     static defaultProps = {
@@ -104,11 +85,27 @@ export class EmbeddedArrayInput extends Component {
         allowRemove: true,
         labelAdd: 'aor.input.embedded_array.add',
         labelRemove: 'aor.input.embedded_array.remove',
+        allowDivider: true,
         actionsContainerStyle: {
             clear: 'both',
             margin: '1em',
             display: 'block',
             textAlign: 'right',
+        },
+        innerContainerStyle: {
+            padding: '0 1em 1em 1em',
+            width: '90%',
+            display: 'inline-block',
+        },
+        labelContainerStyle: {
+            padding: '1.2em 1em 0 0',
+            width: '90%',
+            display: 'inline-block',
+        },
+        labelStyle: {
+            top: 0,
+            position: 'relative',
+            textTransform: 'capitalize',
         },
     };
 
@@ -128,6 +125,7 @@ export class EmbeddedArrayInput extends Component {
         disabled,
         customButtons,
         actionsContainerStyle,
+        innerContainerStyle,
     }) => {
         const removeItem = () => items.remove(index);
         const passedProps = {
@@ -138,7 +136,7 @@ export class EmbeddedArrayInput extends Component {
 
         return (
             <div className="EmbeddedArrayInputItemContainer">
-                <div style={styles.innerContainer}>
+                <div style={innerContainerStyle}>
                     {React.Children.map(
                         inputs,
                         input =>
@@ -182,6 +180,8 @@ export class EmbeddedArrayInput extends Component {
             disabled,
             customButtons,
             actionsContainerStyle,
+            innerContainerStyle,
+            allowDivider,
         } = this.props;
         const createItem = () => items.push();
 
@@ -202,8 +202,9 @@ export class EmbeddedArrayInput extends Component {
                                 disabled,
                                 customButtons,
                                 actionsContainerStyle,
+                                innerContainerStyle,
                             })}
-                            {index < items.length - 1 && <Divider />}
+                            {allowDivider && index < items.length - 1 && <Divider />}
                         </div>,
                     )}
                 </div>
@@ -222,8 +223,8 @@ export class EmbeddedArrayInput extends Component {
     };
 
     render() {
-        const { source, label, addLabel, translate, resource } = this.props;
-        const labelStyle = Object.assign(styles.label, {
+        const { source, label, addLabel, translate, resource, labelStyle, labelContainerStyle } = this.props;
+        const labelStyleMuiTheme = Object.assign(labelStyle, {
             color: this.context.muiTheme ? this.context.muiTheme.textField.focusColor : '',
         });
 
@@ -239,8 +240,8 @@ export class EmbeddedArrayInput extends Component {
 
         const labelElement =
             !addLabel &&
-            <div style={styles.labelContainer}>
-                <TextFieldLabel muiTheme={this.context.muiTheme} style={labelStyle} shrink={false}>
+            <div style={labelContainerStyle}>
+                <TextFieldLabel muiTheme={this.context.muiTheme} style={labelStyleMuiTheme} shrink={false}>
                     {minimizedLabel}
                 </TextFieldLabel>
             </div>;
