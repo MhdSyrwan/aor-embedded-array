@@ -135,4 +135,4 @@ labelStyle: {
 },
 ```
 
-You can also pass `insertDividers` value as `true` or `false` to get the devider or not. Default value for `insertDividers` is true.
+You can also pass `insertDividers` value as `true` or `false` to get the divider or not. Default value for `insertDividers` is true.
