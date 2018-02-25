@@ -95,3 +95,44 @@ For primitive arrays, define the Views the same way but without the source prop 
      <TextField source="context" />
  </EmbeddedArrayInput>
 ```
+
+### Passing props to customize style
+
+There are four style props you can pass to customize style, those are `actionsContainerStyle`, `innerContainerStyle`, `labelStyle` & `insertDividers`.
+
+Default values of those are as follows
+
+```js
+actionsContainerStyle: {
+    clear: 'both',
+    margin: '1em',
+    display: 'block',
+    textAlign: 'right',
+},
+```
+
+```js
+innerContainerStyle: {
+    padding: '0 1em 1em 1em',
+    width: '90%',
+    display: 'inline-block',
+},
+```
+
+```js
+labelContainerStyle: {
+    padding: '1.2em 1em 0 0',
+    width: '90%',
+    display: 'inline-block',
+},
+```
+
+```js
+labelStyle: {
+    top: 0,
+    position: 'relative',
+    textTransform: 'capitalize',
+},
+```
+
+You can also pass `insertDividers` value as `true` or `false` to get the divider or not. Default value for `insertDividers` is true.
