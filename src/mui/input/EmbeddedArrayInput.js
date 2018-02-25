@@ -74,7 +74,7 @@ export class EmbeddedArrayInput extends Component {
         innerContainerStyle: PropTypes.object,
         labelContainerStyle: PropTypes.object,
         labelStyle: PropTypes.object,
-        allowDivider: PropTypes.bool,
+        insertDividers: PropTypes.bool,
     };
 
     static defaultProps = {
@@ -85,7 +85,7 @@ export class EmbeddedArrayInput extends Component {
         allowRemove: true,
         labelAdd: 'aor.input.embedded_array.add',
         labelRemove: 'aor.input.embedded_array.remove',
-        allowDivider: true,
+        insertDividers: true,
         actionsContainerStyle: {
             clear: 'both',
             margin: '1em',
@@ -181,7 +181,7 @@ export class EmbeddedArrayInput extends Component {
             customButtons,
             actionsContainerStyle,
             innerContainerStyle,
-            allowDivider,
+            insertDividers,
         } = this.props;
         const createItem = () => items.push();
 
@@ -204,7 +204,7 @@ export class EmbeddedArrayInput extends Component {
                                 actionsContainerStyle,
                                 innerContainerStyle,
                             })}
-                            {allowDivider && index < items.length - 1 && <Divider />}
+                            {insertDividers && index < items.length - 1 && <Divider />}
                         </div>,
                     )}
                 </div>

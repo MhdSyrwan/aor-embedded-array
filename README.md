@@ -98,7 +98,7 @@ For primitive arrays, define the Views the same way but without the source prop 
 
 ### Passing props to customize style
 
-There are four style props you can pass to customize style, those are `actionsContainerStyle`, `innerContainerStyle`, `labelStyle` & `allowDivider`.
+There are four style props you can pass to customize style, those are `actionsContainerStyle`, `innerContainerStyle`, `labelStyle` & `insertDividers`.
 
 Default values of those are as follows
 
@@ -135,4 +135,4 @@ labelStyle: {
 },
 ```
 
-You can also pass `allowDivider` value as `true` or `false` to get the devider or not. Default value for `allowDivider` is true.
+You can also pass `insertDividers` value as `true` or `false` to get the devider or not. Default value for `insertDividers` is true.
