@@ -1,6 +1,6 @@
 {
   "name": "aor-embedded-array",
-  "version": "0.0.8",
+  "version": "0.1.0",
   "description": "Embeded Array Field/Input for Admin On Rest",
   "main": "./lib/index.js",
   "repository": "https://github.com/mhdsyrwan/aor-embedded-array.git",
