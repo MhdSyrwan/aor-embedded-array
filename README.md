@@ -96,6 +96,15 @@ For primitive arrays, define the Views the same way but without the source prop 
  </EmbeddedArrayInput>
 ```
 
+### Customizing Add and Remove buttons' labels
+You can make use of the translation system provided by `admin-on-rest` and set the following translation paths:
+1. `aor.input.embedded_array.add` to set Add Button's label.
+2. `aor.input.embedded_array.remove` to set Remove Button's label.
+
+Also, you can change the translation path's themselves by providing values for props `labelAdd` and `labelRemove`.
+
+You can learn more about admin-on-rest's translation system from this link: https://marmelab.com/admin-on-rest/Translation.html
+
 ### Passing props to customize style
 
 There are four style props you can pass to customize style, those are `actionsContainerStyle`, `innerContainerStyle`, `labelStyle` & `insertDividers`.
