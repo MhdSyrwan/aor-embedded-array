@@ -6,6 +6,8 @@
 
 A custom field/input component for [Admin-on-rest](https://github.com/marmelab/admin-on-rest/) that provides the ability to represent embedded arrays.
 
+![screenshot](docs/screenshots/general.png)
+
 ## Installation
 
 Install with:
