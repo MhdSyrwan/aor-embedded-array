@@ -102,6 +102,8 @@ For primitive arrays, define the Views the same way but without the source prop 
 You can make use of the translation system provided by `admin-on-rest` and set the following translation paths:
 1. `aor.input.embedded_array.add` to set Add Button's label.
 2. `aor.input.embedded_array.remove` to set Remove Button's label.
+3. `aor.input.embedded_array.move_up` to set Move-Up Button's label.
+4. `aor.input.embedded_array.move_down` to set Move-Down Button's label.
 
 Also, you can change the translation path's themselves by providing values for props `labelAdd` and `labelRemove`.
 

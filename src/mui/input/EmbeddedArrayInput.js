@@ -7,6 +7,8 @@ import FlatButton from 'material-ui/FlatButton';
 import TextFieldLabel from 'material-ui/TextField/TextFieldLabel';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import ActionDeleteIcon from 'material-ui/svg-icons/action/delete';
+import HardwareKeyboardArrowUp from 'material-ui/svg-icons/hardware/keyboard-arrow-up';
+import HardwareKeyboardArrowDown from 'material-ui/svg-icons/hardware/keyboard-arrow-down';
 import Divider from 'material-ui/Divider';
 
 import { translate } from 'admin-on-rest';
@@ -54,6 +56,7 @@ export class EmbeddedArrayInput extends Component {
         allowEmpty: PropTypes.bool.isRequired,
         allowAdd: PropTypes.bool.isRequired,
         allowRemove: PropTypes.bool.isRequired,
+        allowSorting: PropTypes.bool.isRequired,
         arrayElStyle: PropTypes.object,
         basePath: PropTypes.string,
         children: PropTypes.node.isRequired,
@@ -83,8 +86,11 @@ export class EmbeddedArrayInput extends Component {
         allowEmpty: true,
         allowAdd: true,
         allowRemove: true,
+        allowSorting: true,
         labelAdd: 'aor.input.embedded_array.add',
         labelRemove: 'aor.input.embedded_array.remove',
+        labelSortingUp: 'aor.input.embedded_array.sorting_up',
+        labelSortingDown: 'aor.input.embedded_array.sorting_down',
         insertDividers: true,
         actionsContainerStyle: {
             clear: 'both',
@@ -115,12 +121,15 @@ export class EmbeddedArrayInput extends Component {
 
     renderListItem = ({
         allowRemove,
+        allowSorting,
         items,
         inputs,
         member,
         index,
         translate,
         labelRemove,
+        labelSortingUp,
+        labelSortingDown,
         readOnly,
         disabled,
         customButtons,
@@ -128,6 +137,8 @@ export class EmbeddedArrayInput extends Component {
         innerContainerStyle,
     }) => {
         const removeItem = () => items.remove(index);
+        const moveItemUp = () => {if (index !== 0) return items.move(index, index - 1)};
+        const moveItemDown = () => {if (index !== items.length - 1) return items.move(index, index + 1)};
         const passedProps = {
             resource: this.props.resource,
             basePath: this.props.basePath,
@@ -150,7 +161,7 @@ export class EmbeddedArrayInput extends Component {
                             </div>,
                     )}
                 </div>
-                {(customButtons || (allowRemove && !readOnly && !disabled)) &&
+                {(customButtons || (allowRemove && !readOnly && !disabled) || (allowSorting && !readOnly && !disabled)) &&
                     <div style={actionsContainerStyle}>
                         {allowRemove &&
                             !readOnly &&
@@ -161,6 +172,23 @@ export class EmbeddedArrayInput extends Component {
                                 icon={<ActionDeleteIcon />}
                                 onClick={removeItem}
                             />}
+                        {allowSorting &&
+                            !readOnly &&
+                            !disabled &&
+                            <span>
+                                <FlatButton
+                                    secondary
+                                    label={translate(labelSortingUp, {_: 'Move Up'})}
+                                    icon={<HardwareKeyboardArrowUp/>}
+                                    onClick={moveItemUp}
+                                />
+                                <FlatButton
+                                    secondary
+                                    label={translate(labelSortingUp, {_: 'Move Down'})}
+                                    icon={<HardwareKeyboardArrowDown />}
+                                    onClick={moveItemDown}
+                                />
+                            </span>}
                         {customButtons && customButtons.map(button => React.cloneElement(button, { items, index }))}
                     </div>}
             </div>
@@ -176,6 +204,7 @@ export class EmbeddedArrayInput extends Component {
             labelAdd,
             allowAdd,
             allowRemove,
+            allowSorting,
             readOnly,
             disabled,
             customButtons,
@@ -198,6 +227,7 @@ export class EmbeddedArrayInput extends Component {
                                 translate,
                                 labelRemove,
                                 allowRemove,
+                                allowSorting,
                                 readOnly,
                                 disabled,
                                 customButtons,
