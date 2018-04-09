@@ -1,0 +1,1 @@
+Example usage of aor-embedded-array

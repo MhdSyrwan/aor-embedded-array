@@ -30,6 +30,13 @@ test: ## Launch unit tests
 		--opts ./mocha.opts \
 		"./src/**/*.spec.js"
 
+inspect-test: ## Launch unit tests
+	@NODE_ENV=test ./node_modules/.bin/nyc \
+		./node_modules/.bin/mocha \
+		--opts ./mocha.opts \
+		--inspect-brk \
+		"./src/**/*.spec.js"
+
 
 watch-test: ## Launch unit tests and watch for changes
 	@NODE_ENV=test ./node_modules/.bin/nyc \
