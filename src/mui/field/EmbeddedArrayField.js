@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import _ from 'lodash';
 import { SimpleShowLayout } from 'admin-on-rest';
+import _ from '../../lib/custom-lodash';
 
 /**
  * A container component that shows embedded array elements as a list of input sets
