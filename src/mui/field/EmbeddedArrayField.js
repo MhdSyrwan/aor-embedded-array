@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import get from 'lodash.get';
+import _ from 'lodash';
 import { SimpleShowLayout } from 'admin-on-rest';
 
 /**
@@ -36,10 +36,13 @@ export class EmbeddedArrayField extends Component {
     render() {
         const { resource, children, source, record } = this.props;
         const layoutProps = { resource, basePath: '/', record };
-        const elements = get(record, source) || [];
+        const elements = _.get(record, source) || [];
+        const elementsWithIndex = _.map(elements, (el, k) => _.merge(el, { _index: k }));
+
         return (
             <div>
-                {elements.map(
+                {_.map(
+                    elementsWithIndex,
                     (element, i) =>
                         <SimpleShowLayout {...layoutProps} key={i}>
                             {React.Children.map(children, child =>
