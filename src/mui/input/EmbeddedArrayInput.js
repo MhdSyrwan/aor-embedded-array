@@ -7,6 +7,8 @@ import FlatButton from 'material-ui/FlatButton';
 import TextFieldLabel from 'material-ui/TextField/TextFieldLabel';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import ActionDeleteIcon from 'material-ui/svg-icons/action/delete';
+import HardwareKeyboardArrowUp from 'material-ui/svg-icons/hardware/keyboard-arrow-up';
+import HardwareKeyboardArrowDown from 'material-ui/svg-icons/hardware/keyboard-arrow-down';
 import Divider from 'material-ui/Divider';
 
 import { translate } from 'admin-on-rest';
@@ -54,6 +56,7 @@ export class EmbeddedArrayInput extends Component {
         allowEmpty: PropTypes.bool.isRequired,
         allowAdd: PropTypes.bool.isRequired,
         allowRemove: PropTypes.bool.isRequired,
+        allowOrdering: PropTypes.bool.isRequired,
         arrayElStyle: PropTypes.object,
         basePath: PropTypes.string,
         children: PropTypes.node.isRequired,
@@ -83,8 +86,11 @@ export class EmbeddedArrayInput extends Component {
         allowEmpty: true,
         allowAdd: true,
         allowRemove: true,
+        allowOrdering: true,
         labelAdd: 'aor.input.embedded_array.add',
         labelRemove: 'aor.input.embedded_array.remove',
+        labelOrderingUp: 'aor.input.embedded_array.ordering_up',
+        labelOrderingDown: 'aor.input.embedded_array.ordering_down',
         insertDividers: true,
         actionsContainerStyle: {
             clear: 'both',
@@ -115,12 +121,15 @@ export class EmbeddedArrayInput extends Component {
 
     renderListItem = ({
         allowRemove,
+        allowOrdering,
         items,
         inputs,
         member,
         index,
         translate,
         labelRemove,
+        labelOrderingUp,
+        labelOrderingDown,
         readOnly,
         disabled,
         customButtons,
@@ -128,6 +137,10 @@ export class EmbeddedArrayInput extends Component {
         innerContainerStyle,
     }) => {
         const removeItem = () => items.remove(index);
+        const moveItemUp = () => {if (index !== 0) return items.move(index, index - 1)};
+        const moveItemDown = () => {if (index !== items.length - 1) return items.move(index, index + 1)};
+        const isFirstItemInList = () => {if (index === 0) return true};
+        const isLatestItemInList = () => {if (index === items.length -1) return true};
         const passedProps = {
             resource: this.props.resource,
             basePath: this.props.basePath,
@@ -150,7 +163,7 @@ export class EmbeddedArrayInput extends Component {
                             </div>,
                     )}
                 </div>
-                {(customButtons || (allowRemove && !readOnly && !disabled)) &&
+                {(customButtons || (allowRemove && !readOnly && !disabled) || (allowOrdering && !readOnly && !disabled)) &&
                     <div style={actionsContainerStyle}>
                         {allowRemove &&
                             !readOnly &&
@@ -161,6 +174,27 @@ export class EmbeddedArrayInput extends Component {
                                 icon={<ActionDeleteIcon />}
                                 onClick={removeItem}
                             />}
+                        {allowOrdering &&
+                            !readOnly &&
+                            !disabled &&
+                            <span>
+                                {!isFirstItemInList() &&
+                                <FlatButton
+                                    secondary
+                                    label={translate(labelOrderingUp, {_: 'Move Up'})}
+                                    icon={<HardwareKeyboardArrowUp/>}
+                                    onClick={moveItemUp}
+                                />
+                                }
+                                {!isLatestItemInList() &&
+                                <FlatButton
+                                    secondary
+                                    label={translate(labelOrderingUp, {_: 'Move Down'})}
+                                    icon={<HardwareKeyboardArrowDown />}
+                                    onClick={moveItemDown}
+                                />
+                                }
+                            </span>}
                         {customButtons && customButtons.map(button => React.cloneElement(button, { items, index }))}
                     </div>}
             </div>
@@ -176,6 +210,7 @@ export class EmbeddedArrayInput extends Component {
             labelAdd,
             allowAdd,
             allowRemove,
+            allowOrdering,
             readOnly,
             disabled,
             customButtons,
@@ -198,6 +233,7 @@ export class EmbeddedArrayInput extends Component {
                                 translate,
                                 labelRemove,
                                 allowRemove,
+                                allowOrdering,
                                 readOnly,
                                 disabled,
                                 customButtons,
