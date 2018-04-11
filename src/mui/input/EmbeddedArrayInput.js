@@ -139,6 +139,8 @@ export class EmbeddedArrayInput extends Component {
         const removeItem = () => items.remove(index);
         const moveItemUp = () => {if (index !== 0) return items.move(index, index - 1)};
         const moveItemDown = () => {if (index !== items.length - 1) return items.move(index, index + 1)};
+        const isFirstItemInList = () => {if (index === 0) return true};
+        const isLatestItemInList = () => {if (index === items.length -1) return true};
         const passedProps = {
             resource: this.props.resource,
             basePath: this.props.basePath,
@@ -176,18 +178,22 @@ export class EmbeddedArrayInput extends Component {
                             !readOnly &&
                             !disabled &&
                             <span>
+                                {!isFirstItemInList() &&
                                 <FlatButton
                                     secondary
                                     label={translate(labelOrderingUp, {_: 'Move Up'})}
                                     icon={<HardwareKeyboardArrowUp/>}
                                     onClick={moveItemUp}
                                 />
+                                }
+                                {!isLatestItemInList() &&
                                 <FlatButton
                                     secondary
                                     label={translate(labelOrderingUp, {_: 'Move Down'})}
                                     icon={<HardwareKeyboardArrowDown />}
                                     onClick={moveItemDown}
                                 />
+                                }
                             </span>}
                         {customButtons && customButtons.map(button => React.cloneElement(button, { items, index }))}
                     </div>}
