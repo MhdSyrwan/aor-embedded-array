@@ -56,7 +56,7 @@ export class EmbeddedArrayInput extends Component {
         allowEmpty: PropTypes.bool.isRequired,
         allowAdd: PropTypes.bool.isRequired,
         allowRemove: PropTypes.bool.isRequired,
-        allowSorting: PropTypes.bool.isRequired,
+        allowOrdering: PropTypes.bool.isRequired,
         arrayElStyle: PropTypes.object,
         basePath: PropTypes.string,
         children: PropTypes.node.isRequired,
@@ -86,11 +86,11 @@ export class EmbeddedArrayInput extends Component {
         allowEmpty: true,
         allowAdd: true,
         allowRemove: true,
-        allowSorting: true,
+        allowOrdering: true,
         labelAdd: 'aor.input.embedded_array.add',
         labelRemove: 'aor.input.embedded_array.remove',
-        labelSortingUp: 'aor.input.embedded_array.sorting_up',
-        labelSortingDown: 'aor.input.embedded_array.sorting_down',
+        labelOrderingUp: 'aor.input.embedded_array.ordering_up',
+        labelOrderingDown: 'aor.input.embedded_array.ordering_down',
         insertDividers: true,
         actionsContainerStyle: {
             clear: 'both',
@@ -121,15 +121,15 @@ export class EmbeddedArrayInput extends Component {
 
     renderListItem = ({
         allowRemove,
-        allowSorting,
+        allowOrdering,
         items,
         inputs,
         member,
         index,
         translate,
         labelRemove,
-        labelSortingUp,
-        labelSortingDown,
+        labelOrderingUp,
+        labelOrderingDown,
         readOnly,
         disabled,
         customButtons,
@@ -161,7 +161,7 @@ export class EmbeddedArrayInput extends Component {
                             </div>,
                     )}
                 </div>
-                {(customButtons || (allowRemove && !readOnly && !disabled) || (allowSorting && !readOnly && !disabled)) &&
+                {(customButtons || (allowRemove && !readOnly && !disabled) || (allowOrdering && !readOnly && !disabled)) &&
                     <div style={actionsContainerStyle}>
                         {allowRemove &&
                             !readOnly &&
@@ -172,19 +172,19 @@ export class EmbeddedArrayInput extends Component {
                                 icon={<ActionDeleteIcon />}
                                 onClick={removeItem}
                             />}
-                        {allowSorting &&
+                        {allowOrdering &&
                             !readOnly &&
                             !disabled &&
                             <span>
                                 <FlatButton
                                     secondary
-                                    label={translate(labelSortingUp, {_: 'Move Up'})}
+                                    label={translate(labelOrderingUp, {_: 'Move Up'})}
                                     icon={<HardwareKeyboardArrowUp/>}
                                     onClick={moveItemUp}
                                 />
                                 <FlatButton
                                     secondary
-                                    label={translate(labelSortingUp, {_: 'Move Down'})}
+                                    label={translate(labelOrderingUp, {_: 'Move Down'})}
                                     icon={<HardwareKeyboardArrowDown />}
                                     onClick={moveItemDown}
                                 />
@@ -204,7 +204,7 @@ export class EmbeddedArrayInput extends Component {
             labelAdd,
             allowAdd,
             allowRemove,
-            allowSorting,
+            allowOrdering,
             readOnly,
             disabled,
             customButtons,
@@ -227,7 +227,7 @@ export class EmbeddedArrayInput extends Component {
                                 translate,
                                 labelRemove,
                                 allowRemove,
-                                allowSorting,
+                                allowOrdering,
                                 readOnly,
                                 disabled,
                                 customButtons,
