@@ -190,7 +190,7 @@ export class EmbeddedArrayInput extends Component {
         } = this.props;
         const createItem = () => items.push();
         const isMaxItemsReached = () => {if (maxItems && maxItems === items.length) return true};
-        const maxItemsCount = () => {if (maxItems && maxItemsCount) return ' ('+items.length+'/'+maxItems+')'};
+        const showMaxItemsCount = () => {if (maxItems && maxItemsCount) return ' ('+items.length+'/'+maxItems+')'};
 
         return (
             <div className="EmbeddedArrayInputContainer" style={style}>
@@ -223,7 +223,7 @@ export class EmbeddedArrayInput extends Component {
                     <FlatButton
                         primary
                         icon={<ContentAdd />}
-                        label={translate(labelAdd, { _: 'Add' })+maxItemsCount()}
+                        label={translate(labelAdd, { _: 'Add' })+showMaxItemsCount()}
                         onClick={createItem}
                     />}
             </div>
