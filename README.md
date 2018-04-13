@@ -147,3 +147,18 @@ labelStyle: {
 ```
 
 You can also pass `insertDividers` value as `true` or `false` to get the divider or not. Default value for `insertDividers` is true.
+
+### Limit list items
+
+There is a prop named `maxItems`:
+
+```jsx
+ <EmbeddedArrayField source="links" maxItems={3}>
+     <UrlField source="url" />
+     <TextField source="context" />
+     <EmbeddedArrayField source="metadata" maxItems={5}>
+         <TextField source="name" />
+         <TextField source="value" />
+     </EmbeddedArrayField>
+ </EmbeddedArrayField>
+```

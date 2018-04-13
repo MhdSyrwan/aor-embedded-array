@@ -75,6 +75,7 @@ export class EmbeddedArrayInput extends Component {
         labelContainerStyle: PropTypes.object,
         labelStyle: PropTypes.object,
         insertDividers: PropTypes.bool,
+        maxItems: PropTypes.number
     };
 
     static defaultProps = {
@@ -182,8 +183,10 @@ export class EmbeddedArrayInput extends Component {
             actionsContainerStyle,
             innerContainerStyle,
             insertDividers,
+            maxItems,
         } = this.props;
         const createItem = () => items.push();
+        const isMaxItemsReached = () => {if (maxItems && maxItems === items.length) return true};
 
         return (
             <div className="EmbeddedArrayInputContainer" style={style}>
@@ -212,6 +215,7 @@ export class EmbeddedArrayInput extends Component {
                 {allowAdd &&
                     !readOnly &&
                     !disabled &&
+                    !isMaxItemsReached() &&
                     <FlatButton
                         primary
                         icon={<ContentAdd />}
