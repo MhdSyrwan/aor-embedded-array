@@ -189,8 +189,8 @@ export class EmbeddedArrayInput extends Component {
             maxItemsCount,
         } = this.props;
         const createItem = () => items.push();
-        const isMaxItemsReached = () => {if (maxItems && maxItems === items.length) return true};
-        const showMaxItemsCount = () => {if (maxItems && maxItemsCount) return ' ('+items.length+'/'+maxItems+')'};
+        const isMaxItemsReached = () => {return (maxItems && maxItems === items.length) ? true : false};
+        const showMaxItemsCount = () => {return (maxItems && maxItemsCount) ? ' ('+items.length+'/'+maxItems+')' : '';} ;
 
         return (
             <div className="EmbeddedArrayInputContainer" style={style}>
