@@ -75,6 +75,8 @@ export class EmbeddedArrayInput extends Component {
         labelContainerStyle: PropTypes.object,
         labelStyle: PropTypes.object,
         insertDividers: PropTypes.bool,
+        maxItems: PropTypes.number,
+        maxItemsCount: PropTypes.bool,
     };
 
     static defaultProps = {
@@ -86,6 +88,7 @@ export class EmbeddedArrayInput extends Component {
         labelAdd: 'aor.input.embedded_array.add',
         labelRemove: 'aor.input.embedded_array.remove',
         insertDividers: true,
+        maxItemsCount: true,
         actionsContainerStyle: {
             clear: 'both',
             margin: '1em',
@@ -182,8 +185,12 @@ export class EmbeddedArrayInput extends Component {
             actionsContainerStyle,
             innerContainerStyle,
             insertDividers,
+            maxItems,
+            maxItemsCount,
         } = this.props;
         const createItem = () => items.push();
+        const isMaxItemsReached = () => {return (maxItems && maxItems === items.length) ? true : false};
+        const showMaxItemsCount = () => {return (maxItems && maxItemsCount) ? ' ('+items.length+'/'+maxItems+')' : '';} ;
 
         return (
             <div className="EmbeddedArrayInputContainer" style={style}>
@@ -212,10 +219,11 @@ export class EmbeddedArrayInput extends Component {
                 {allowAdd &&
                     !readOnly &&
                     !disabled &&
+                    !isMaxItemsReached() &&
                     <FlatButton
                         primary
                         icon={<ContentAdd />}
-                        label={translate(labelAdd, { _: 'Add' })}
+                        label={translate(labelAdd, { _: 'Add' })+showMaxItemsCount()}
                         onClick={createItem}
                     />}
             </div>
